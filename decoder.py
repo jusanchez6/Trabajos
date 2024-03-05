@@ -1,18 +1,41 @@
 # This script is a morse decoder
 
-# MORSE CODE DICTIONARY MODIFIED
-# 1: casilla negra
-# 0: casilla blanca
-# 2: salto de linea
+# Primero se recibe del usuario el numero de filas y columnas
+# El numero de filas se verá reflejado en los parpadeos del agujero "."
+# El numero de columnas se verá reflejado en los parpadeos del agujero "-"
+# Despues de esto se debe recibir un parpadeo em "\n"
+# Esto ultimo indica el final del emcabezado de la trama
+
+# Luego se recibe el mensaje en morse code,
+# Al final de cada caracter se recibe un parpadeo en el agujero "\n"
+# Esto indica el final del caracter.
+
+
+#       |-----------------------------------------------------|
+#       |---         -------            -------           ----|
+#       |---  "."    -------    "\n"    -------   "-"     ----|
+#       |---         -------            -------           ----|
+#       |-----------------------------------------------------|
+
+
+# "." Corresponde a la casilla donde se envian los puntos
+# "-" Corresponde a la casilla donde se envian los guiones
+# "\n" Corresponde a la casilla donde se envian final de caracter (solo un pulso luminoso al finalizar
+# el caracter)
+
+
+# Las filas se recibe una a una, este mismo software se
+# Encargará de decodificar el mensaje
+# Y de mostrar cada una de las filas decodificadas.
 
 
 # Morse code dictionary
 morse_code_dict = {
-    ".-": "A",
+    ".-.-.": "A",
     "-...": "B",
     "-.-.": "C",
     "-..": "D",
-    ".": "E",
+    "..-.-": "E",
     "..-.": "F",
     "--.": "G",
     "....": "H",
@@ -34,9 +57,9 @@ morse_code_dict = {
     "-..-": "X",
     "-.--": "Y",
     "--..": "Z",
-    "-----": "white",
-    ".----": "black",
-    "..---": "\n",
+    "-----": "0",
+    ".----": "1",
+    "..---": "2",
     "...--": "3",
     "....-": "4",
     ".....": "5",
@@ -44,6 +67,8 @@ morse_code_dict = {
     "--...": "7",
     "---..": "8",
     "----.": "9",
+    ".-": "#",  # Espacio en negro
+    ".": "$",  # Espacio en blanco
 }
 
 
@@ -64,12 +89,9 @@ def morse_to_text(morse_code):
 
 # Get user input
 
-n_inputs = int(input("Enter the number of Morse code inputs: "))
-n_inputs_row = int(n_inputs**0.5)
-n_inputs_col = n_inputs_row
-
-print("The number of rows:", n_inputs_row)
-print("The number of columns:", n_inputs_col)
+# n_inputs = int(input("Enter the number of Morse code inputs: "))
+n_inputs_row = input("Ingrese el numero de filas: ")
+n_inputs_col = input("Ingrese el numero de columnas: ")
 
 
 cont_col = 0

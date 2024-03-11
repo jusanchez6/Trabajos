@@ -90,8 +90,8 @@ def morse_to_text(morse_code):
 # Get user input
 
 # n_inputs = int(input("Enter the number of Morse code inputs: "))
-n_inputs_row = input("Ingrese el numero de filas: ")
-n_inputs_col = input("Ingrese el numero de columnas: ")
+n_inputs_row = int(input("Ingrese el numero de filas: "))
+n_inputs_col = int(input("Ingrese el numero de columnas: "))
 
 
 cont_col = 0

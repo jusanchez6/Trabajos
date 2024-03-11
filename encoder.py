@@ -94,13 +94,27 @@ count_cols = 0
 while count_rows < rows:
 
     while count_cols < cols:
-        chrt_in = input(f"Enter character for row and col({count_rows},{count_cols}): ")
-        matriz[count_rows][count_cols] = chrt_in
 
-        # Codificar el mensaje
-        morse_code = text_to_morse(chrt_in)
-        print(f"Code to transmit: {morse_code}")
-        count_cols += 1
+        chrt_in = input(f"Enter character for row and col({count_rows},{count_cols}): ")
+
+        if len(chrt_in) > 1:
+            num = chrt_in[0]
+            chrt_in_letter = chrt_in[1]
+
+            for j in range(0, int(num)):
+                matriz[count_rows][count_cols] = chrt_in_letter
+                count_cols += 1
+
+            num_code = text_to_morse(num)
+            morse_code = text_to_morse(chrt_in_letter)
+            print(f"Code to transmit: {num_code}{morse_code}")
+
+        else:
+            # Codificar el mensaje
+            matriz[count_rows][count_cols] = chrt_in
+            morse_code = text_to_morse(chrt_in)
+            print(f"Code to transmit: {morse_code}")
+            count_cols += 1
 
     count_cols = 0
     count_rows += 1

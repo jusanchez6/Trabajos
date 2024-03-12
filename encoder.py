@@ -86,7 +86,7 @@ def text_to_morse(text):
 rows = int(input("Ingrese la cantidad de filas: "))
 cols = int(input("Ingrese la cantidad de columnas: "))
 
-matriz = [[" " for _ in range(rows)] for _ in range(cols)]
+matriz = [[" " for _ in range(cols)] for _ in range(rows)]
 
 count_rows = 0
 count_cols = 0

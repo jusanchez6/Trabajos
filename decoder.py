@@ -90,16 +90,22 @@ def morse_to_text(morse_code):
 # Get user input
 
 # n_inputs = int(input("Enter the number of Morse code inputs: "))
-n_inputs_row = int(input("Ingrese el numero de filas: "))
-n_inputs_col = int(input("Ingrese el numero de columnas: "))
+rows = int(input("Ingrese el numero de filas: "))
+cols = int(input("Ingrese el numero de columnas: "))
+
+matriz = [["" for _ in range(cols)] for _ in range(rows)]
 
 
-cont_col = 0
-cont_row = 0
-while cont_row < n_inputs_col:
+count_cols = 0
+count_rows = 0
+while count_rows < rows:
+
     final_result = []
-    while cont_col < n_inputs_row:
-        morse_in = input(f"Enter Morse code for row {cont_row}(use '.' and '-'): ")
+
+    while count_cols < cols:
+        morse_in = input(
+            f"Enter Morse code for row row and col({count_rows},{count_cols}): "
+        )
 
         if len(morse_in) > 5:
 
@@ -111,15 +117,23 @@ while cont_row < n_inputs_col:
             num_translate = morse_to_text(num)
 
             for j in range(0, int(num_translate)):
+                matriz[count_rows][count_cols] = letter_translate
                 final_result.append(letter_translate)
+                count_cols += 1
 
         else:
             letter_translate = morse_to_text(morse_in)
-            num_translate = 1
             final_result.append(letter_translate)
+            matriz[count_rows][count_cols] = letter_translate
+            count_cols += 1
 
-        cont_col += int(num_translate)
+    print(f"output of row: {count_rows}", final_result)
 
-    cont_col = 0
-    print(f"output of row: {cont_row}", final_result)
-    cont_row += 1
+    count_cols = 0
+    count_rows += 1
+
+
+# Print the result
+print("\nDecoded message:")
+for fila in matriz:
+    print(" ".join(map(str, fila)))

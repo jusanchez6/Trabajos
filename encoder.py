@@ -69,7 +69,7 @@ morse_code_dict = {
 
 
 def text_to_morse(text):
-    # text = text.upper()  # Convert text to uppercase
+    text = text.upper()  # Convert text to uppercase
     morse_code_func = []
 
     for char in text:
@@ -102,7 +102,7 @@ while count_rows < rows:
             chrt_in_letter = chrt_in[1]
 
             for j in range(0, int(num)):
-                matriz[count_rows][count_cols] = chrt_in_letter
+                matriz[count_rows][count_cols] = chrt_in_letter.upper()
                 count_cols += 1
 
             num_code = text_to_morse(num)

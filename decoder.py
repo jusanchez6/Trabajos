@@ -28,6 +28,7 @@
 # Encargará de decodificar el mensaje
 # Y de mostrar cada una de las filas decodificadas.
 
+import time
 
 # Morse code dictionary
 morse_code_dict = {
@@ -72,6 +73,35 @@ morse_code_dict = {
 }
 
 
+def cmp_code(num, morse_code):
+    cnt = 0
+    for i in enumerate(morse_code):
+        if num[i] == morse_code[i]:
+            cnt += 1
+    return cnt
+
+
+def search_number(morse_code):
+    number = [
+        "-----",
+        ".----",
+        "..---",
+        "...--",
+        "....-",
+        ".....",
+        "-....",
+        "--...",
+        "---..",
+        "----.",
+    ]
+    cmp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    for i, number in enumerate(number):
+        cmp[i] = cmp_code(num, number)
+
+    return cmp.index(max(cmp))
+
+
 def morse_to_text(morse_code):
     words = morse_code.split("   ")  # Separate words
     translated_words = []
@@ -108,18 +138,24 @@ while count_rows < rows:
         )
 
         if len(morse_in) > 5:
+            try:
+                # En el caso de que haya un numero (debe haber mas de 5 caracteres)
+                num = morse_in[0:5]
+                letter = morse_in[5:]
 
-            # En el caso de que haya un numero (debe haber mas de 5 caracteres)
-            num = morse_in[0:5]
-            letter = morse_in[5:]
+                letter_translate = morse_to_text(letter)
+                num_translate = morse_to_text(num)
 
-            letter_translate = morse_to_text(letter)
-            num_translate = morse_to_text(num)
+                for j in range(0, int(num_translate)):
+                    matriz[count_rows][count_cols] = letter_translate
+                    final_result.append(letter_translate)
+                    count_cols += 1
 
-            for j in range(0, int(num_translate)):
-                matriz[count_rows][count_cols] = letter_translate
-                final_result.append(letter_translate)
-                count_cols += 1
+            except ValueError:
+                for j in range(0, search_number(num_translate)):
+                    matriz[count_rows][count_cols] = letter_translate
+                    final_result.append(letter_translate)
+                    count_cols += 1
 
         else:
             letter_translate = morse_to_text(morse_in)

@@ -24,7 +24,7 @@
 # "-" Corresponde a la casilla donde se envian los guiones
 # "\n" Corresponde a la casilla donde se envian final de caracter (solo un pulso luminoso al finalizar
 # el caracter)
-
+import time
 
 morse_code_dict = {
     "A": ".-.-.",
@@ -91,7 +91,11 @@ matriz = [[" " for _ in range(cols)] for _ in range(rows)]
 count_rows = 0
 count_cols = 0
 
+start_time = time.time()
+
 while count_rows < rows:
+
+    result_row = []
 
     while count_cols < cols:
 
@@ -103,6 +107,7 @@ while count_rows < rows:
 
             for j in range(0, int(num)):
                 matriz[count_rows][count_cols] = chrt_in_letter.upper()
+
                 count_cols += 1
 
             num_code = text_to_morse(num)
@@ -112,13 +117,20 @@ while count_rows < rows:
         else:
             # Codificar el mensaje
             matriz[count_rows][count_cols] = chrt_in
+
             morse_code = text_to_morse(chrt_in)
-            print(f"Code to transmit: {morse_code}")
+            result_row.append(morse_code)
             count_cols += 1
+
+    print(f"output of row: {count_rows}", result_row)
 
     count_cols = 0
     count_rows += 1
 
+
+end_time = time.time()
+
+print(f"Time elapsed: {end_time - start_time}")
 print("Matriz Resultante:")
 for fila in matriz:
     print(" ".join(map(str, fila)))
